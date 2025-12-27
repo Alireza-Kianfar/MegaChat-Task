@@ -1,6 +1,10 @@
-from django.urls import path
-from .views import MessageListCreateAPIView
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import ChatMessageViewSet
+
+router = DefaultRouter()
+router.register(r'messages', ChatMessageViewSet, basename='message')
 
 urlpatterns = [
-    path('messages/', MessageListCreateAPIView.as_view()),
+    path('', include(router.urls)),
 ]
